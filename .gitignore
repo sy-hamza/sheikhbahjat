@@ -12,6 +12,8 @@ build/
 .env
 .env.local
 .env.production
+.env.r2
+backend/.env.r2
 
 # Database (local only)
 backend/*.db
