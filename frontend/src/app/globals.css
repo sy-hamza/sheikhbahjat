@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════
+   Sheikh Amer Bahjat - Digital Archive
+   Design System & Global Styles
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── CSS Custom Properties (Design Tokens) ────────────────── */
+@theme {
+  --variant-dark: class;
+
+  --color-primary: #1B2A4A;
+  --color-primary-light: #2A3F6E;
+  --color-secondary: #2D5A3D;
+  --color-secondary-light: #3D7A52;
+  --color-accent: #C5A55A;
+  --color-accent-light: #D4B86A;
+  --color-accent-dark: #A68B3E;
+
+  --color-bg-warm: #FAF7F2;
+  --color-bg-cream: #F5F0E6;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-dark: #0F1724;
+  --color-bg-dark-surface: #1A2332;
+  --color-bg-dark-elevated: #243044;
+
+  --color-text-primary: #1F2937;
+  --color-text-secondary: #4B5563;
+  --color-text-muted: #6B7280;
+  --color-text-dark-primary: #F3F4F6;
+  --color-text-dark-secondary: #D1D5DB;
+
+  --color-border: #E5DDD0;
+  --color-border-dark: #2D3748;
+
+  --color-gold-gradient-start: #C5A55A;
+  --color-gold-gradient-end: #E8D5A0;
+
+  --font-family-heading: 'Cairo', sans-serif;
+  --font-family-body: 'Cairo', sans-serif;
+  --font-family-ui: 'Cairo', sans-serif;
+  
+  --font-sans: 'Cairo', sans-serif;
+  --font-serif: 'Amiri', serif;
+
+  --shadow-soft: 0 2px 15px rgba(0, 0, 0, 0.06);
+  --shadow-medium: 0 4px 25px rgba(0, 0, 0, 0.1);
+  --shadow-heavy: 0 8px 40px rgba(0, 0, 0, 0.15);
+  --shadow-glow-gold: 0 0 20px rgba(197, 165, 90, 0.3);
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+}
+
+/* ─── Base Styles ──────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  direction: rtl;
+}
+
+body {
+  font-family: var(--font-family-body);
+  background-color: var(--color-bg-warm);
+  color: var(--color-text-primary);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition-slow), color var(--transition-slow);
+}
+
+/* Dark mode */
+.dark body,
+body.dark {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-dark-primary);
+}
+
+/* ─── Typography ───────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-heading);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--color-primary);
+}
+
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  color: var(--color-text-dark-primary);
+}
+
+/* ─── Custom Scrollbar ─────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-cream);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 4px;
+  transition: background var(--transition-fast);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-dark);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: var(--color-bg-dark-surface);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-border-dark);
+}
+
+/* ─── Islamic Geometric Pattern Background ─────────────────── */
+.pattern-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C5A55A' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.dark .pattern-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C5A55A' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ─── Glass Morphism Utilities ─────────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark .glass {
+  background: rgba(26, 35, 50, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ─── Gold Gradient Text ───────────────────────────────────── */
+.text-gold-gradient {
+  background: linear-gradient(135deg, var(--color-accent), var(--color-gold-gradient-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Decorative Divider ───────────────────────────────────── */
+.divider-ornament {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.divider-ornament::before,
+.divider-ornament::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-accent),
+    transparent
+  );
+}
+
+/* ─── 3D Book Card Effect ──────────────────────────────────── */
+.book-3d {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.book-3d-inner {
+  transition: transform var(--transition-normal);
+  transform-style: preserve-3d;
+}
+
+.book-3d:hover .book-3d-inner {
+  transform: rotateY(-5deg) scale(1.03);
+}
+
+.book-spine {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light));
+  transform: rotateY(90deg) translateZ(10px);
+  transform-origin: right center;
+  border-radius: 0 4px 4px 0;
+}
+
+/* ─── Audio Player Styles ──────────────────────────────────── */
+.audio-progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(197, 165, 90, 0.4);
+}
+
+.audio-progress::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--color-border);
+}
+
+/* ─── Selection Color ──────────────────────────────────────── */
+::selection {
+  background-color: rgba(197, 165, 90, 0.3);
+  color: var(--color-primary);
+}
+
+/* ─── Focus Styles (Accessibility) ─────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── Verse Lines (for poems) ──────────────────────────────── */
+.verse-line {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(197, 165, 90, 0.15);
+  font-family: var(--font-family-heading);
+  font-size: 1.2rem;
+  line-height: 2;
+  color: var(--color-text-primary);
+}
+
+.dark .verse-line {
+  color: var(--color-text-dark-primary);
+}
+
+.verse-line:last-child {
+  border-bottom: none;
+}
+
+/* ─── Animations ───────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(197, 165, 90, 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
