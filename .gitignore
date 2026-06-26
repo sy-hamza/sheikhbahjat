@@ -38,3 +38,6 @@ node-v22.16.0-win-x64/
 # OS
 .DS_Store
 Thumbs.db
+
+# Claude Code local artifacts
+.claude/
