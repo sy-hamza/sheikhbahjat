@@ -15,10 +15,11 @@ build/
 .env.r2
 backend/.env.r2
 
-# Database (local only)
+# Database (local only) — except the deploy snapshot used by Render
 backend/*.db
 backend/*.db-shm
 backend/*.db-wal
+!backend/sheikh_bahjat_deploy.db
 
 # Uploads (local only)
 backend/uploads/
