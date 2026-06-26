@@ -20,6 +20,8 @@ import {
   Shield,
   Loader2,
   Video,
+  Menu,
+  X,
 } from "lucide-react";
 import { authApi } from "@/lib/api";
 
@@ -36,6 +38,12 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const [checkingAuth, setCheckingAuth] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  // Close the mobile sidebar whenever the route changes
+  useEffect(() => {
+    setSidebarOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     // Don't check auth on login page
@@ -73,17 +81,49 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen flex pt-20">
+      {/* Mobile top bar with menu toggle (hidden on desktop) */}
+      <div className="lg:hidden fixed top-20 right-0 left-0 z-30 flex items-center gap-3 px-4 h-14 bg-[var(--color-bg-surface)] dark:bg-[var(--color-bg-dark-surface)] border-b border-[var(--color-border)] dark:border-[var(--color-border-dark)]">
+        <button
+          onClick={() => setSidebarOpen(true)}
+          aria-label="فتح القائمة"
+          className="p-2 -mr-2 rounded-lg text-[var(--color-text-secondary)] dark:text-[var(--color-text-dark-secondary)] hover:bg-[var(--color-bg-cream)] dark:hover:bg-[var(--color-bg-dark-elevated)]"
+        >
+          <Menu size={22} />
+        </button>
+        <span className="text-sm font-bold text-[var(--color-primary)] dark:text-[var(--color-text-dark-primary)]">لوحة التحكم</span>
+      </div>
+
+      {/* Backdrop for mobile sidebar */}
+      {sidebarOpen && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          className="lg:hidden fixed inset-0 z-40 bg-black/50"
+          aria-hidden="true"
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 bg-[var(--color-bg-surface)] dark:bg-[var(--color-bg-dark-surface)] border-l border-[var(--color-border)] dark:border-[var(--color-border-dark)] p-4 flex flex-col fixed right-0 top-20 bottom-0 z-40">
-        {/* Admin header */}
+      <aside
+        className={`w-64 bg-[var(--color-bg-surface)] dark:bg-[var(--color-bg-dark-surface)] border-l border-[var(--color-border)] dark:border-[var(--color-border-dark)] p-4 flex flex-col fixed right-0 top-20 bottom-0 z-50 transition-transform duration-300 lg:translate-x-0 ${
+          sidebarOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        {/* Admin header + mobile close button */}
         <div className="flex items-center gap-3 px-3 py-3 mb-4">
           <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-light)] flex items-center justify-center">
             <Shield size={16} className="text-white" />
           </div>
-          <div>
+          <div className="flex-1">
             <p className="text-sm font-bold text-[var(--color-primary)] dark:text-[var(--color-text-dark-primary)]">لوحة التحكم</p>
             <p className="text-xs text-[var(--color-text-muted)]">المدير</p>
           </div>
+          <button
+            onClick={() => setSidebarOpen(false)}
+            aria-label="إغلاق القائمة"
+            className="lg:hidden p-1.5 rounded-lg text-[var(--color-text-secondary)] dark:text-[var(--color-text-dark-secondary)] hover:bg-[var(--color-bg-cream)] dark:hover:bg-[var(--color-bg-dark-elevated)]"
+          >
+            <X size={18} />
+          </button>
         </div>
 
         {/* Navigation */}
@@ -119,7 +159,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       </aside>
 
       {/* Main content */}
-      <div className="flex-1 mr-64 p-8">
+      <div className="flex-1 lg:mr-64 p-4 lg:p-8 pt-18 lg:pt-8 max-w-full overflow-x-hidden">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
