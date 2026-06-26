@@ -71,10 +71,16 @@ def create_app() -> FastAPI:
     app.include_router(upload.router)
     app.include_router(videos.router)
 
-    # ─── Static Files (uploads) ───────────────────────────
-    uploads_dir = settings.UPLOAD_DIR
-    os.makedirs(uploads_dir, exist_ok=True)
-    app.mount("/uploads", StaticFiles(directory=uploads_dir), name="uploads")
+    # ─── Media serving (uploads) ──────────────────────────
+    # If R2 is configured, stream files from the bucket via a router.
+    # Otherwise serve from the local disk (development).
+    if settings.R2_ENDPOINT and settings.R2_ACCESS_KEY_ID:
+        from app.routers import files as files_router
+        app.include_router(files_router.router)
+    else:
+        uploads_dir = settings.UPLOAD_DIR
+        os.makedirs(uploads_dir, exist_ok=True)
+        app.mount("/uploads", StaticFiles(directory=uploads_dir), name="uploads")
 
     # ─── Startup Event ────────────────────────────────────
     @app.on_event("startup")

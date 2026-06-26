@@ -12,11 +12,14 @@ build/
 .env
 .env.local
 .env.production
+.env.r2
+backend/.env.r2
 
-# Database (local only)
+# Database (local only) — except the deploy snapshot used by Render
 backend/*.db
 backend/*.db-shm
 backend/*.db-wal
+!backend/sheikh_bahjat_deploy.db
 
 # Uploads (local only)
 backend/uploads/
@@ -36,3 +39,6 @@ node-v22.16.0-win-x64/
 # OS
 .DS_Store
 Thumbs.db
+
+# Claude Code local artifacts
+.claude/

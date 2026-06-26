@@ -62,6 +62,15 @@ class Settings(BaseSettings):
     STORAGE_SECRET_ACCESS_KEY: str = ""
     STORAGE_REGION: str = "us-east-1"
 
+    # ─── R2 Media Proxy ────────────────────────────────────────
+    # When R2_ENDPOINT is set, /uploads/{filename} is streamed from the
+    # Cloudflare R2 bucket instead of the local disk. Lets the backend serve
+    # media over its own HTTPS domain (avoids relying on the r2.dev URL).
+    R2_ENDPOINT: str = ""
+    R2_ACCESS_KEY_ID: str = ""
+    R2_SECRET_ACCESS_KEY: str = ""
+    R2_BUCKET: str = ""
+
     # ─── SMTP Email Notifications ──────────────────────────────
     SMTP_HOST: str = "smtp.gmail.com"
     SMTP_PORT: int = 587
